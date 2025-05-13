@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./masterpages/baseMasterV1.xhtml">
+
+            <ui:define name="title">
+                Главная
+            </ui:define>
+
+            <ui:define name="top">
+                #{registerViewMasterController.currentUuser.fullName}
+            </ui:define>
+
+            <ui:define name="content">
+                <script type="text/javascript">
+                    PrimeFaces.locales ['ru'] = {
+                        closeText: 'Закрыть',
+                        prevText: 'Назад',
+                        nextText: 'Вперёд',
+                        currentText: 'Home',
+                        monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                        monthNamesShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
+                        dayNames: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+                        dayNamesShort: ['Воск', 'Пон', 'Вт', 'Ср', 'Четв', 'Пят', 'Суб'],
+                        dayNamesMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+                        weekHeader: 'Неделя',
+                        FirstDay: 1,
+                        isRTL: false,
+                        showMonthAfterYear: false,
+                        yearSuffix: '',
+                        timeOnlyTitle: 'Только время',
+                        timeText: 'Время',
+                        hourText: 'Час',
+                        minuteText: 'Минута',
+                        secondText: 'Секунда',
+                        currentText: 'Сегодня',
+                        ampm: false,
+                        month: 'Месяц',
+                        week: 'неделя',
+                        day: 'День',
+                        allDayText: 'Весь день'
+                    };
+                </script>
+                <h:form>
+                    <p:toolbar>
+                        <p:toolbarGroup>
+                            <p:datePicker value="#{registerViewMasterController.startDate}" showIcon="true" lang="ru" locale="ru" >
+                                <p:ajax update="@form" process="@this"/>
+                            </p:datePicker>
+                            <p:outputLabel value="&nbsp;-&nbsp;" rendered="#{registerViewMasterController.dateInterval}" />
+                            <p:datePicker id="endDate" value="#{registerViewMasterController.endDate}" 
+                                          showIcon="true" lang="ru" locale="ru" 
+                                          mindate="#{registerViewMasterController.startDate}"
+                                          rendered="#{registerViewMasterController.dateInterval}" >
+                                <p:ajax update="@form" process="@this"/>
+                            </p:datePicker>      
+                            <p:outputLabel value="&nbsp;" />
+                            <p:selectBooleanButton onLabel="Да" offLabel="Нет" value="#{registerViewMasterController.dateInterval}"
+                                                   onIcon="pi pi-check" offIcon="pi pi-times" style="width:6rem" >
+                                <p:ajax update="@form" process="@this"/>
+                            </p:selectBooleanButton>
+                            <span>&nbsp;За интервал дат</span>
+                        </p:toolbarGroup>
+  
+                        <span> За интервал дат: </span>
+                        <p:toolbarGroup>
+                            <p:selectOneMenu value="#{registerViewMasterController.currentRregister}"
+                                             converter="registerConverter">
+                                <p:ajax update="@form" process="@this"/>
+                                <f:selectItem value="${null}" />
+                                <f:selectItems value="#{registerViewMasterController.registerList}"
+                                               var="register"
+                                               itemLabel="#{register.title}"
+                                               itemValue="#{register}"/>
+                            </p:selectOneMenu>
+                        </p:toolbarGroup>
+
+                        <p:toolbarGroup>
+
+                        </p:toolbarGroup>
+                    </p:toolbar>
+
+
+                    <div>
+                        <ui:repeat value="#{registerViewMasterController.dateList}" var="date">
+                            <p:fieldset  legend="#{date}" toggleable="true">
+                            <ui:repeat value="#{registerViewMasterController.currentRregister.documentTypeSet}" var="documentType">
+
+                                <p:panel header="#{documentType.title}">
+                                    <p:dataScroller value="#{documentType.fileTemplateList}" var="fileTemplate">
+
+                                        <p:dataTable value="#{fileTemplate.findFileByDate(date)}" var="file">
+                                            
+                                            <p:column width="32">
+                                                <i class="pi #{fileTemplate.required ? 'pi-check' : ''}"></i>
+                                            </p:column>
+                                            
+                                            <p:column>
+                                                 <p:link value="#{file.getName()}" href="#{file.toURI()}" />
+                                            </p:column>
+                                           
+                                            <p:column>
+                                                
+                                            </p:column>
+                                            
+                                            <p:column>
+                                                
+                                            </p:column>
+                                        </p:dataTable>
+
+
+
+                                    </p:dataScroller>
+                                </p:panel>
+
+                            </ui:repeat>
+                        </p:fieldset>
+                        </ui:repeat>
+ 
+                    </div>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

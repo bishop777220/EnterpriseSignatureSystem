@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="primefaces"
+      xmlns:h="jakarta.faces.html">
+
+    <body>
+
+        <ui:composition template="./../../masterpages/baseMasterV1.xhtml">
+
+            <ui:define name="title">
+                Изменение регистра
+            </ui:define>
+
+            <ui:define name="top">
+                Изменение регистра
+            </ui:define>
+
+            <ui:define name="content">
+                <f:view>
+
+
+                    <h:form>
+                        <p:card title="Создание нового регистра">
+                            <div class="itemBloc">
+                                <div class="lable"><p:outputLabel value="Наименование:" for="title" /></div>
+                                <div class="body"><p:inputText id="title" value="#{reestrViewBean.register.title}" title="Title" required="true" /></div>
+                                <div class="validatorMessage"></div>
+                                <small class="block"></small>
+                            </div>
+                            <div class="itemBloc">
+                                <div class="lable"><p:outputLabel value="Полное наименование:" for="fullName" /></div>
+                                <div class="body"><p:inputText id="fullName" value="#{reestrViewBean.register.fullName}" title="FullName" required="true" /></div>
+                            </div>
+                            <div class="itemBloc">
+                                <div class="lable"><p:outputLabel value="Описание:" for="description" /></div>
+                                <div class="body"><p:inputTextarea rows="6" id="description" value="#{reestrViewBean.register.description}" title="Description" /></div>
+                            </div>
+                            <div class="itemBloc">
+                                <div class="lable"><p:outputLabel value="Реестр являетья списком документов дня:" for="isDayTimeDocuments" /></div>
+                                <div class="body">
+                                    <p:selectBooleanButton id="isDayTimeDocuments" value="#{reestrViewBean.register.isDayTimeDocuments}" 
+                                                           onLabel="Да" offLabel="Нет" 
+                                                           onIcon="pi pi-check" offIcon="pi pi-times"  
+                                                           title="isDayTimeDocuments">
+                                        <p:ajax update="dateFolderMask dateFolderMaskLable isDayTimeDocumentsInfo" />
+                                    </p:selectBooleanButton>
+                                </div>
+                                <div class="validatorMessage"></div>
+                                <small class="block">Указывает что в директории документы будут в директориях за дату согласно маске даты по умолчанию Да</small>
+                            </div>
+                            <div class="itemBloc">
+                                <div class="lable"><p:outputLabel id="dateFolderMaskLable" value="Маска формата даты: #{!reestrViewBean.register.isDayTimeDocuments}" for="dateFolderMask" /></div>
+                                <div class="body"><p:inputText id="dateFolderMask" value="#{reestrViewBean.register.dateFolderMask}" title="DateFolderMask" required="#{reestrViewBean.register.isDayTimeDocuments}"
+                                                               disabled="#{!reestrViewBean.register.isDayTimeDocuments}"/>
+                                </div>
+                                <div class="validatorMessage"><p:outputLabel id="isDayTimeDocumentsInfo"  value=" Реестр не являетья списком документов дня " style="color: #ffcc66; display:#{reestrViewBean.register.isDayTimeDocuments ?  'none' :  'inline'};" /> </div>
+                                <small class="block">Маска директории дня - даты в формате dd.MM.yyyy</small>
+                            </div>
+                           
+                            <div class="itemBloc">
+                                <div class="lable"><p:outputLabel value="Разрешить отправлять по одному виду документа:" for="sendOneByOne" /></div>
+                                <div class="body"><p:selectBooleanButton id="sendOneByOne" value="#{reestrViewBean.register.sendOneByOne}" 
+                                                                         onLabel="Да" offLabel="Нет" 
+                                                                         onIcon="pi pi-check" offIcon="pi pi-times"  
+                                                                         title="SendOneByOne" /></div>
+                                <div class="validatorMessage"></div>
+                                <small class="block">Указывает что отправка будет осуществляться каждого видв документа отдельно по умолчанию Нет</small>
+                            </div>
+                            <div class="itemBloc">
+                                <div class="lable"></div>
+                                <div class="body"></div>
+                                <div class="validatorMessage"></div>
+                                <small class="block"></small>
+                            </div>
+
+
+                            <f:facet name="footer" >
+                                <p:divider/>
+                                <div style="text-align: right;">
+                                    <p:commandButton icon="pi pi-check" value="Сохранитть" update="@form" action="#{reestrViewBean.editRegister('/admin/register/registerDispForm')}"/>
+                                    <p:commandButton icon="pi pi-times" value="Отмена" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                                </div>
+                            </f:facet>
+
+                        </p:card>
+
+                    </h:form>
+                </f:view>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="primefaces">
+
+    <body>
+
+        <ui:composition template="./../masterpages/baseMasterV1.xhtml">
+            
+            <ui:define name="title">
+                Параметры системы
+            </ui:define>
+
+            <ui:define name="top">
+                top
+            </ui:define>
+
+            <ui:define name="content">
+                <h4>Справочники</h4>
+                <ul>
+                    <li><p:link value="Реестры" outcome="/admin/register/index" /></li>
+                    <li><p:link value="Источники" /></li>
+                    <li><p:link value="Места назначения" /></li>
+                    <li><p:link value="Виды документов" /></li>
+                </ul>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

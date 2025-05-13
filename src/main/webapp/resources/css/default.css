@@ -1,0 +1,28 @@
+body{
+    margin: 0;
+}
+.center_content{
+    background-color: #e9ecef;
+        padding: 20px;
+}
+.itemBloc{
+    margin-bottom: 15px;
+}
+.itemBloc.inline .lable, .itemBloc.inline .body{
+    display: inline;
+}
+.itemBloc .lable{
+    font-weight: bold;
+    color: #BDBDBD;
+}
+.itemBloc .body {
+
+}
+.itemBloc .body input, .itemBloc .body textarea{
+    width: 100%
+}
+
+.card-footer{
+    border-radius: 5px;
+    padding: 3px;
+}

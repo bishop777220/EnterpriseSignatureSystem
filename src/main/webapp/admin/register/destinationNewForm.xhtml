@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="primefaces">
+
+    <body>
+
+        <ui:composition template="./../../masterpages/baseMasterV1.xhtml">
+
+            <ui:define name="title">
+                Создание директория назначения
+            </ui:define>
+
+            <ui:define name="top">
+                Создание директория назначения
+            </ui:define>
+
+            <ui:define name="content">
+                <f:view>
+
+
+                    <h:form>
+                        <p:card title="Создание директория назначения">
+                            <div class="itemBloc">
+                                <div class="lable"><p:outputLabel value="Регистр:"  /></div>
+                                <div class="body"><p:outputLabel value="#{reestrViewBean.destination.register.title}" /></div>
+                                <div class="validatorMessage"></div>
+                                <small class="block"></small>
+                            </div>
+                            <div class="itemBloc">
+                                <div class="lable"><p:outputLabel value="Наименование:" for="title" /></div>
+                                <div class="body"><p:inputText id="title" value="#{reestrViewBean.destination.title}" title="Title" required="true" /></div>
+                                <div class="validatorMessage"></div>
+                                <small class="block"></small>
+                            </div>
+                            <div class="itemBloc">
+                                <div class="lable"><p:outputLabel value="Путь:" for="path" /></div>
+                                <div class="body"><p:inputText id="path" value="#{reestrViewBean.destination.path}" title="Path" required="true" /></div>
+                                <div class="validatorMessage"></div>
+                                <small class="block"></small>
+                            </div>
+                            
+                            <div class="itemBloc">
+                                <div class="lable"><p:outputLabel value="Description:" for="description" /></div>
+                                <div class="body"><p:inputTextarea rows="6" id="description" value="#{reestrViewBean.destination.description}" title="Description" /></div>
+                                <div class="validatorMessage"></div>
+                                <small class="block"></small>
+                            </div>
+
+                            <f:facet name="footer" >
+                                <p:divider/>
+                                <div style="text-align: right;">
+                                    <p:commandButton icon="pi pi-check" value="Сохранитть" update="@form" action="#{reestrViewBean.createDestination('/admin/register/registerDispForm')}"/>
+                                    <p:commandButton icon="pi pi-times" value="Отмена" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                                </div>
+                            </f:facet>
+
+                        </p:card>
+ 
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

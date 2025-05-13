@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="primefaces"
+      xmlns:f="jakarta.faces.core"
+
+      xmlns:h="jakarta.faces.html">
+
+    <body>
+
+        <ui:composition template="./../../masterpages/baseMasterV1.xhtml">
+
+            <ui:define name="title">
+                Реестры
+            </ui:define>
+
+            <ui:define name="top">
+                top
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                    <p:linkButton value="Добавить реестр" outcome="/admin/register/registerNewForm" />
+                    <p:dataTable value="#{reestrViewBean.findRegister()}" var="register">
+
+
+                        <p:column headerText="Наименование">
+                            <p:link value="#{register.title}" style="display: block" outcome="/admin/register/registerDispForm">
+                                <f:param name="rID" value="#{register.id}" />
+                            </p:link>
+                            <small>#{register.fullName}</small>
+                        </p:column>
+
+
+                        <p:column headerText="Источники">
+                            <ui:repeat value="#{register.sourceSet}" var="source">
+                                <div>#{source.path}</div>
+                            </ui:repeat>
+                        </p:column>
+
+                        <p:column width="50">
+                            <p:commandButton icon="pi pi-times" update="@form" action="#{reestrViewBean.removeRegister(register, '/admin/register/index')}" />
+                        </p:column>
+
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

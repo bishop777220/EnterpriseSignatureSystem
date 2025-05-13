@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="primefaces">
+
+    <body>
+
+        <ui:composition template="./../../masterpages/baseMasterV1.xhtml">
+
+            <ui:define name="title">
+                Создание вида документа
+            </ui:define>
+
+            <ui:define name="top">
+                Создание вида документа
+            </ui:define>
+
+            <ui:define name="content">
+                <f:view>
+
+
+                    <h:form>
+                        <p:card title="Создание вида документа">
+                            <div class="itemBloc">
+                                <div class="lable"><p:outputLabel value="Наименование:" for="title" /></div>
+                                <div class="body"><p:inputText id="title" value="#{reestrViewBean.documentType.title}" title="Title" required="true" /></div>
+                                <div class="validatorMessage"></div>
+                                <small class="block"></small>
+                            </div>
+                            <div class="itemBloc">
+                                <div class="lable"><p:outputLabel value="Полное наименование:" for="folderName" /></div>
+                                <div class="body"><p:inputText id="folderName" value="#{reestrViewBean.documentType.folderName}" title="FolderName" required="true" /></div>
+                                <div class="validatorMessage"></div>
+                                <small class="block"></small>
+                            </div>
+                            <div class="itemBloc">
+                                <div class="lable"><p:outputLabel value="Описание:" for="description" /></div>
+                                <div class="body"><p:inputTextarea rows="6" id="description" value="#{reestrViewBean.documentType.description}" title="Description" /></div>
+                                <div class="validatorMessage"></div>
+                                <small class="block"></small>
+                            </div>
+                            <div class="itemBloc">
+                                <div class="lable"><p:outputLabel value="До директории дня:" for="beforeTheDate" /></div>
+                                <div class="body"><p:selectBooleanButton id="beforeTheDate" value="#{reestrViewBean.documentType.beforeTheDate}" 
+                                                                         onLabel="Да" offLabel="Нет" 
+                                                                         onIcon="pi pi-check" offIcon="pi pi-times" 
+                                                                         title="BeforeTheDate" /></div>
+                                <div class="validatorMessage"></div>
+                                <small class="block">Указывает что директория вида догумента находиться до директории дня по умолчанию false</small>
+                            </div>
+                            <div class="itemBloc">
+                                <div class="lable"><p:outputLabel value="Учавствовать вложенные директории:" for="recursive" /></div>
+                                <div class="body"><p:selectBooleanButton  id="recursive" value="#{reestrViewBean.documentType.recursive}" 
+                                                                          onLabel="Да" offLabel="Нет" 
+                                                                          onIcon="pi pi-check" offIcon="pi pi-times" 
+                                                                          title="Recursive" /></div>
+                                <div class="validatorMessage"></div>
+                                <small class="block">Указывает что в отображении шаблонов видов документа будут учавствовать вложенные директории по умолчанию false</small>
+                            </div>
+                            
+
+                            <f:facet name="footer" >
+                                <p:divider/>
+                                <div style="text-align: right;">
+                                    <p:commandButton icon="pi pi-check" value="Сохранитть" update="@form" action="#{reestrViewBean.createDocumentType('/admin/register/registerDispForm')}"/>
+                                    <p:commandButton icon="pi pi-times" value="Отмена" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                                </div>
+                            </f:facet>
+
+                        </p:card>
+
+                    </h:form>
+                </f:view>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

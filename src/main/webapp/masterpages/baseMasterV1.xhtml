@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="primefaces">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <h:outputStylesheet library="css" name="icons.css"/>
+        <!--link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css" /-->
+        <title><ui:insert name="title">КСПД</ui:insert></title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top" class="top">
+            <h:form>
+                <p:toolbar style="background-color: #ccffcc">
+                    <p:toolbarGroup>
+
+                        <p:linkButton icon="pi pi-home" outcome="/index" />                       
+                    </p:toolbarGroup>
+                    <p:toolbarGroup>
+                        <ui:insert name="top">Top</ui:insert>
+                    </p:toolbarGroup>
+                    
+                    <p:toolbarGroup>
+                        <p:menuButton value="Параметры">
+                            <p:menuitem value="Профиль" />
+                            <p:menuitem value="Параметры системы" outcome="/admin/index" />
+                            <p:menuitem value="Осистеме." />
+                        </p:menuButton>
+                    </p:toolbarGroup>
+                </p:toolbar>
+            </h:form>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+
+    </h:body>
+
+</html>
