@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="jakarta.faces.facelets"
-      xmlns:f="jakarta.faces.core"
       xmlns:h="jakarta.faces.html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core">
 
     <body>
 
@@ -87,7 +87,8 @@
                         </p:toolbarGroup>
                     </p:toolbar>
 
-
+                                               
+                    
                     <div>
                         <ui:repeat value="#{registerViewMasterController.dateList}" var="date">
                             <p:fieldset  legend="#{date}" toggleable="true">
