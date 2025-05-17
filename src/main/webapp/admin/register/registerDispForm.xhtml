@@ -4,18 +4,18 @@
       xmlns:ui="jakarta.faces.facelets"
       xmlns:h="jakarta.faces.html"
       xmlns:f="jakarta.faces.core"
-      xmlns:p="primefaces">
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./../../masterpages/baseMasterV1.xhtml">
 
             <ui:define name="title">
-                Регистр ${reestrViewBean.register.title}
+                ${reestrViewBean.register.title}
             </ui:define>
 
             <ui:define name="top">
-                Регистр ${reestrViewBean.register.title}
+                ${reestrViewBean.register.title}
             </ui:define>
 
             <ui:define name="content">
@@ -23,84 +23,92 @@
 
 
                     <h:form>
-                        <p:accordionPanel multiple="true" cache="true" activeIndex="3" >
-                            <p:tab title="Регистр: ${reestrViewBean.register.title}">
+                        <p:tabView  cache="true" >
+                            <p:tab title="Регистр">
+                                <p:card title="${reestrViewBean.register.title}">
+                                    <div class="itemBloc">
+                                        <div class="lable"><p:outputLabel value="Наименование:" /></div>
+                                        <div class="body"><p:outputLabel value="#{reestrViewBean.register.title}" title="Title"/></div>
+                                        <small class="block"></small>
+                                    </div>
+                                    <div class="itemBloc">
+                                        <div class="lable"><p:outputLabel value="Полное наименование:"/></div>
+                                        <div class="body"><p:outputLabel value="#{reestrViewBean.register.fullName}" title="FullName"/></div>
+                                        <small class="block"></small>
+                                    </div>
+                                    <div class="itemBloc">
+                                        <div class="lable"><p:outputLabel value="Описание:"/></div>
+                                        <div class="body"><p:outputLabel value="#{reestrViewBean.register.description}" title="Description"/></div>
+                                        <small class="block"></small>
+                                    </div>
+                                    <div class="itemBloc">
+                                        <div class="lable"><p:outputLabel value="Реестр являетья списком документов дня:"  /></div>
+                                        <div class="body"><p:selectBooleanButton id="isDayTimeDocuments" value="#{reestrViewBean.register.isDayTimeDocuments}"
+                                                                                 onLabel="Да" offLabel="Нет" 
+                                                                                 onIcon="pi pi-check" offIcon="pi pi-times"   
+                                                                                 title="isDayTimeDocuments"
+                                                                                 disabled="true"/></div>
+                                        <small class="block"></small>
+                                    </div>
+                                    <div class="itemBloc">
+                                        <div class="lable"><p:outputLabel value="Маска формата даты:"/></div>
+                                        <div class="body"><p:outputLabel value="#{reestrViewBean.register.dateFolderMask}" title="DateFolderMask"/></div>
+                                        <small class="block"></small>
+                                    </div>
+                                    <div class="itemBloc">
+                                        <div class="lable"><p:outputLabel value="Разрешить отправлять по одному виду документа:"/></div>
+                                        <div class="body"><p:selectBooleanButton id="sendOneByOne" value="#{reestrViewBean.register.sendOneByOne}" 
+                                                                                 onLabel="Да" offLabel="Нет" 
+                                                                                 onIcon="pi pi-check" offIcon="pi pi-times"  
+                                                                                 title="SendOneByOne" 
+                                                                                 disabled="true"/></div>
+                                        <small class="block"></small>
+                                    </div>
+                                    <div class="itemBloc">
+                                        <div class="lable"></div>
+                                        <div class="body"></div>
+                                        <small class="block"></small>
+                                    </div>
+
+                                    <p:divider/>
+                                    <table width="100%" class="card-footer">
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <b>Создано: </b>
+                                                    <p:outputLabel value="#{reestrViewBean.register.created}" title="Created">
+                                                        <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy HH:mm" />
+                                                    </p:outputLabel>
+                                                    <b> Кем создано: </b>
+                                                    <p:outputLabel value="#{reestrViewBean.register.createdBy.fullName}" title="CreatedBy"/>
+                                                </div>
+                                                <div>
+                                                    <b>Изменено: </b>
+                                                    <p:outputLabel value="#{reestrViewBean.register.updated}" title="Updated">
+                                                        <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy HH:mm" />
+                                                    </p:outputLabel>
+                                                    <b> Кем изменено: </b>
+                                                    <p:outputLabel value="#{reestrViewBean.register.updatedBy.fullName}" title="UpdatedBy"/>
+                                                </div>
+                                                <div>
+                                                    <b>Версия: </b>
+                                                    <p:outputLabel value="#{reestrViewBean.register.version}" title="Version"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <p:divider/>
 
 
+                                </p:card>
 
-                                <div class="itemBloc">
-                                    <div class="lable"><p:outputLabel value="Наименование:"/></div>
-                                    <div class="body"><p:outputLabel value="#{reestrViewBean.register.title}" title="Title"/></div>
-                                </div>
-                                <div class="itemBloc">
-                                    <div class="lable"><p:outputLabel value="Полное наименование:"/></div>
-                                    <div class="body"><p:outputLabel value="#{reestrViewBean.register.fullName}" title="FullName"/></div>
-                                </div>
-                                <div class="itemBloc">
-                                    <div class="lable"><p:outputLabel value="Описание:"/></div>
-                                    <div class="body"><p:outputLabel value="#{reestrViewBean.register.description}" title="Description"/></div>
-                                </div>
-                                
-                                
-                                <div class="itemBloc">
-                                    <div class="lable"><p:outputLabel value="Реестр являетья списком документов дня:"  /></div>
-                                    <div class="body"><p:selectBooleanButton id="isDayTimeDocuments" value="#{reestrViewBean.register.isDayTimeDocuments}"
-                                                                             onLabel="Да" offLabel="Нет" 
-                                                                             onIcon="pi pi-check" offIcon="pi pi-times"   
-                                                                             title="isDayTimeDocuments"
-                                                                             disabled="true"/></div>
-                                </div>
-                                <div class="itemBloc">
-                                    <div class="lable"><p:outputLabel value="Маска формата даты:"/></div>
-                                    <div class="body"><p:outputLabel value="#{reestrViewBean.register.dateFolderMask}" title="DateFolderMask"/></div>
-                                </div>
-
-                                <div class="itemBloc inline">
-                                    <div class="lable"><p:outputLabel value="Разрешить отправлять по одному виду документа:"/></div>
-                                    <div class="body"><p:selectBooleanButton id="sendOneByOne" value="#{reestrViewBean.register.sendOneByOne}" 
-                                                                             onLabel="Да" offLabel="Нет" 
-                                                                             onIcon="pi pi-check" offIcon="pi pi-times"  
-                                                                             title="SendOneByOne" 
-                                                                             disabled="true"/></div>
-                                </div>
-
-                                <p:divider/>
-                                <table width="100%" class="card-footer">
-                                    <tr>
-                                        <td>
-                                            <div>
-                                                <b>Создано: </b>
-                                                <p:outputLabel value="#{reestrViewBean.register.created}" title="Created">
-                                                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
-                                                </p:outputLabel>
-                                                <b> Кем создано: </b>
-                                                <p:outputLabel value="#{reestrViewBean.register.createdBy.fullName}" title="CreatedBy"/>
-                                            </div>
-                                            <div>
-                                                <b>Изменено: </b>
-                                                <p:outputLabel value="#{reestrViewBean.register.updated}" title="Updated">
-                                                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
-                                                </p:outputLabel>
-                                                <b> Кем изменено: </b>
-                                                <p:outputLabel value="#{reestrViewBean.register.updatedBy.fullName}" title="UpdatedBy"/>
-                                            </div>
-                                            <div>
-                                                <b>Версия: </b>
-                                                <p:outputLabel value="#{reestrViewBean.register.version}" title="Version"/>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-
-
-                                <f:facet name="options">
-                                    <p:menu>
-                                        <p:submenu label="Settings">
-                                            <p:menuitem value="Изменить" outcome="/admin/register/registerEditForm" >
-                                                <f:param name="rID" value="#{reestrViewBean.register.id}" />
-                                            </p:menuitem>
-                                        </p:submenu>
-                                    </p:menu>
+                                <f:facet name="actions">
+                                    <p:menuButton>
+                                        <p:menuitem value="Изменить" outcome="/admin/register/registerEditForm" >
+                                            <f:param name="rID" value="#{reestrViewBean.register.id}" />
+                                        </p:menuitem>
+                                    </p:menuButton>
                                 </f:facet>
 
                             </p:tab>
@@ -124,14 +132,12 @@
                                 </p:dataTable>
 
 
-                                <f:facet name="options">
-                                    <p:menu>
-                                        <p:submenu label="Settings">
-                                            <p:menuitem value="Добавить директорию источник" outcome="/admin/register/sourceNewForm" >
-                                                <f:param name="rID" value="#{reestrViewBean.register.id}" />
-                                            </p:menuitem>
-                                        </p:submenu>
-                                    </p:menu>
+                                <f:facet name="actions">
+                                    <p:menuButton>
+                                        <p:menuitem value="Добавить директорию источник" outcome="/admin/register/sourceNewForm" >
+                                            <f:param name="rID" value="#{reestrViewBean.register.id}" />
+                                        </p:menuitem>
+                                    </p:menuButton>
                                 </f:facet>
 
                             </p:tab>
@@ -155,81 +161,96 @@
                                 </p:dataTable>
 
 
-                                <f:facet name="options">
-                                    <p:menu>
-                                        <p:submenu label="Settings">
-                                            <p:menuitem value="Добавить директорию назначения" outcome="/admin/register/destinationNewForm" >
-                                                <f:param name="rID" value="#{reestrViewBean.register.id}" />
-                                            </p:menuitem>
-                                        </p:submenu>
-                                    </p:menu>
+                                <f:facet name="actions">
+                                    <p:menuButton>
+                                        <p:menuitem value="Добавить директорию назначения" outcome="/admin/register/destinationNewForm" >
+                                            <f:param name="rID" value="#{reestrViewBean.register.id}" />
+                                        </p:menuitem>
+                                    </p:menuButton>
                                 </f:facet>
                             </p:tab>
 
                             <p:tab title="Виды комплектов">
-                                <p:dataScroller value="#{reestrViewBean.register.documentTypeSet}" var="documentType">
-                                    
-                                    <p:panel header="#{documentType.title}">
+                                <ui:repeat value="#{reestrViewBean.register.documentTypeSet}" var="documentType" >
+
+                                    <p:panel header="#{documentType.title}" style="margin: 20px" footer="#{documentType.recursive ? 'Учавствовать вложенные директории' : 'Только содержимое текущей директории'}" 
+                                             toggleable="true">
                                         <h4>Пути к директориям:</h4>
-                                        
+
                                         <ui:repeat value="#{documentType.getFullSourcePath(null)}" var="path">
                                             <div>
                                                 <p:outputLabel value="#{path}" />
                                             </div>
                                         </ui:repeat>
-                                        
+
                                         <h4>Шаблоны файлов:</h4>
                                         <p:dataTable value="#{documentType.fileTemplateList}" var="fileTemplate">
                                             <p:column headerText="Наименование">
                                                 #{fileTemplate.title}
                                             </p:column>
-                                            
+
                                             <p:column headerText="Маска файла">
                                                 #{fileTemplate.fileMask}
                                             </p:column>
-                                            
+
                                             <p:column headerText="Обязательный">
                                                 #{fileTemplate.required}
                                             </p:column>
-                                            
+
                                             <p:column headerText="Не подписываеться">
                                                 #{fileTemplate.notSignable}
                                             </p:column>                                           
-                                            
+
+                                            <p:column headerText="Не подписываеться">
+                                                <p:menuButton icon="pi pi-cog" styleClass="ui-button-outlined">
+                                                    <p:menuitem value="Удалить" update="@form" action="#{fileTemplateViewController.removeFileTemplate(fileTemplate)}" />
+                                                </p:menuButton>
+                                            </p:column> 
+
                                         </p:dataTable>
-                                        
+
                                         <f:facet name="options">
                                             <p:menu>
                                                 <p:submenu label="Settings">
-                                                    <p:menuitem value="Создать шаблон документа" outcome="/admin/register/fileTemplateNewForm" >
+                                                    <p:menuitem value="Создать шаблон документа"  outcome="/admin/register/fileTemplateNewForm">
                                                         <f:param name="dtID" value="#{documentType.id}" />
                                                     </p:menuitem>
                                                     <p:divider/>
-                                                    <p:menuitem value="Изменить вид документа"  >
-                                                        <f:param name="rID" value="#{reestrViewBean.register.id}" />
+                                                    <p:menuitem value="Изменить вид документа"  outcome="/admin/register/documentTypeEditForm">
+                                                        <f:param name="dtID" value="#{documentType.id}" />
                                                     </p:menuitem>
-                                                    <p:menuitem value="Удалить вид документа"  >
-                                                        <f:param name="rID" value="#{reestrViewBean.register.id}" />
+                                                                                                        
+                                                    <p:menuitem value="Удалить вид документа" action="#{documentTypeViewController.removeDocumentType(documentType)}"   >
+                                                        <f:param name="dtID" value="#{documentType.id}" />
                                                     </p:menuitem>
                                                 </p:submenu>
                                             </p:menu>
                                         </f:facet>
+                                        
                                     </p:panel>
-                                </p:dataScroller>
+                                </ui:repeat>
 
 
 
-                                <f:facet name="options">
-                                    <p:menu>
-                                        <p:submenu label="Settings">
-                                            <p:menuitem value="Добавить вид документа" outcome="/admin/register/documentTypeNewForm" >
-                                                <f:param name="rID" value="#{reestrViewBean.register.id}" />
-                                            </p:menuitem>
-                                        </p:submenu>
-                                    </p:menu>
+                                <f:facet name="actions">
+                                    <p:menuButton>
+                                        <p:menuitem value="Добавить вид документа" outcome="/admin/register/documentTypeNewForm" >
+                                            <f:param name="rID" value="#{reestrViewBean.register.id}" />
+                                        </p:menuitem>
+                                        
+                                    </p:menuButton>
                                 </f:facet>
                             </p:tab>
-                        </p:accordionPanel>
+                            
+                           
+                            <p:tab title="Последовательность подписания">
+                                
+                            </p:tab>
+                            
+                            <p:tab title="Роли и участники">
+                                
+                            </p:tab>
+                        </p:tabView>
                     </h:form>
                 </f:view>
 

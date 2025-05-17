@@ -4,12 +4,11 @@
  */
 package controllers;
 
-
-import jakarta.ejb.EJB;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
-
+import org.primefaces.PrimeFaces;
+import org.primefaces.model.DialogFrameworkOptions;
 
 /**
  *
@@ -19,12 +18,28 @@ import java.io.Serializable;
 @ViewScoped
 public class IndexViewBeans implements Serializable {
 
-    
     /**
      * Creates a new instance of IndexViewBeans
      */
     public IndexViewBeans() {
     }
- 
-    
+
+    public void viewProducts() {
+        DialogFrameworkOptions options = DialogFrameworkOptions.builder()
+                .modal(true)
+                .fitViewport(true)
+                .responsive(true)
+                .width("900px")
+                .contentWidth("100%")
+                .contentHeight("100%")
+                .resizeObserver(true)
+                .resizeObserverCenter(true)
+                .resizable(true)
+                .styleClass("max-w-screen")
+                .iframeStyleClass("max-w-screen")
+                .build();
+
+        PrimeFaces.current().dialog().openDynamic("newTemplateClient", options, null);
+    }
+
 }

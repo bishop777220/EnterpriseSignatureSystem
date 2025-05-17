@@ -51,26 +51,29 @@
                 <h:form>
                     <p:toolbar>
                         <p:toolbarGroup>
-                            <p:datePicker value="#{registerViewMasterController.startDate}" showIcon="true" lang="ru" locale="ru" >
-                                <p:ajax update="@form" process="@this"/>
-                            </p:datePicker>
-                            <p:outputLabel value="&nbsp;-&nbsp;" rendered="#{registerViewMasterController.dateInterval}" />
-                            <p:datePicker id="endDate" value="#{registerViewMasterController.endDate}" 
-                                          showIcon="true" lang="ru" locale="ru" 
-                                          mindate="#{registerViewMasterController.startDate}"
-                                          rendered="#{registerViewMasterController.dateInterval}" >
-                                <p:ajax update="@form" process="@this"/>
-                            </p:datePicker>      
-                            <p:outputLabel value="&nbsp;" />
-                            <p:selectBooleanButton onLabel="Да" offLabel="Нет" value="#{registerViewMasterController.dateInterval}"
-                                                   onIcon="pi pi-check" offIcon="pi pi-times" style="width:6rem" >
-                                <p:ajax update="@form" process="@this"/>
-                            </p:selectBooleanButton>
-                            <span>&nbsp;За интервал дат</span>
+                            <p:linkButton icon="pi pi-home" />
                         </p:toolbarGroup>
-  
-                        <span> За интервал дат: </span>
-                        <p:toolbarGroup>
+                        <p:toolbarGroup rendered="#{registerViewMasterController.currentRregister.isDayTimeDocuments}">
+                           
+                                <p:datePicker value="#{registerViewMasterController.startDate}" showIcon="true" lang="ru" locale="ru" >
+                                    <p:ajax update="@form" process="@this"/>
+                                </p:datePicker>
+                                <p:outputLabel value="&nbsp;-&nbsp;" rendered="#{registerViewMasterController.dateInterval}" />
+                                <p:datePicker id="endDate" value="#{registerViewMasterController.endDate}" 
+                                              showIcon="true" lang="ru" locale="ru" 
+                                              mindate="#{registerViewMasterController.startDate}"
+                                              rendered="#{registerViewMasterController.dateInterval}" >
+                                    <p:ajax update="@form" process="@this"/>
+                                </p:datePicker>      
+                                <p:outputLabel value="&nbsp;" />
+                                <p:selectBooleanButton onLabel="За одну дату" offLabel="Интервал дат" value="#{registerViewMasterController.dateInterval}" >
+                                    <p:ajax update="@form" process="@this"/>
+                                </p:selectBooleanButton>
+                            
+                        </p:toolbarGroup>
+
+                        <p:toolbarGroup align="right">
+                            <p:outputLabel value="Реестр: " />
                             <p:selectOneMenu value="#{registerViewMasterController.currentRregister}"
                                              converter="registerConverter">
                                 <p:ajax update="@form" process="@this"/>
@@ -81,50 +84,46 @@
                                                itemValue="#{register}"/>
                             </p:selectOneMenu>
                         </p:toolbarGroup>
-
-                        <p:toolbarGroup>
-
-                        </p:toolbarGroup>
                     </p:toolbar>
 
-                                               
-                    
+
+
                     <div>
                         <ui:repeat value="#{registerViewMasterController.dateList}" var="date">
                             <p:fieldset  legend="#{date}" toggleable="true">
-                            <ui:repeat value="#{registerViewMasterController.currentRregister.documentTypeSet}" var="documentType">
+                                <ui:repeat value="#{registerViewMasterController.currentRregister.documentTypeSet}" var="documentType">
 
-                                <p:panel header="#{documentType.title}">
-                                    <p:dataScroller value="#{documentType.fileTemplateList}" var="fileTemplate">
+                                    <p:panel header="#{documentType.title}">
+                                        <p:dataScroller value="#{documentType.fileTemplateList}" var="fileTemplate">
 
-                                        <p:dataTable value="#{fileTemplate.findFileByDate(date)}" var="file">
-                                            
-                                            <p:column width="32">
-                                                <i class="pi #{fileTemplate.required ? 'pi-check' : ''}"></i>
-                                            </p:column>
-                                            
-                                            <p:column>
-                                                 <p:link value="#{file.getName()}" href="#{file.toURI()}" />
-                                            </p:column>
-                                           
-                                            <p:column>
-                                                
-                                            </p:column>
-                                            
-                                            <p:column>
-                                                
-                                            </p:column>
-                                        </p:dataTable>
+                                            <p:dataTable value="#{fileTemplate.findFileByDate(date)}" var="file">
+
+                                                <p:column width="32">
+                                                    <i class="pi #{fileTemplate.required ? 'pi-check' : ''}"></i>
+                                                </p:column>
+
+                                                <p:column>
+                                                    <p:link value="#{file.getName()}" href="#{file.toURI()}" />
+                                                </p:column>
+
+                                                <p:column>
+
+                                                </p:column>
+
+                                                <p:column>
+
+                                                </p:column>
+                                            </p:dataTable>
 
 
 
-                                    </p:dataScroller>
-                                </p:panel>
+                                        </p:dataScroller>
+                                    </p:panel>
 
-                            </ui:repeat>
-                        </p:fieldset>
+                                </ui:repeat>
+                            </p:fieldset>
                         </ui:repeat>
- 
+
                     </div>
                 </h:form>
             </ui:define>

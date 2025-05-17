@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
@@ -25,7 +26,8 @@ import java.util.UUID;
 @Entity
 @Table(name = "tpsecuritymember")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class TPSecurityMember implements Serializable {
+@MappedSuperclass
+public abstract class TPSecurityMember implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -39,6 +41,9 @@ public class TPSecurityMember implements Serializable {
     
     @OneToMany(mappedBy = "tpsecurityMember", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<TPSecurityToken> tpsecurityTokenList;
+
+    public TPSecurityMember() {
+    }
 
     public UUID getId() {
         return id;
@@ -78,10 +83,7 @@ public class TPSecurityMember implements Serializable {
             return false;
         }
         TPSecurityMember other = (TPSecurityMember) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
