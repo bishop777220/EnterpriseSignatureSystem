@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="jakarta.faces.facelets"
 
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
 
     <body>
 
@@ -23,7 +25,9 @@
                     <li><p:link value="Реестры" outcome="/admin/register/index" /></li>
                 </ul>
                 <p:commandButton value="ddd" action="#{indexViewBeans.viewProducts()}" />
+                
             </ui:define>
+            
 
         </ui:composition>
 

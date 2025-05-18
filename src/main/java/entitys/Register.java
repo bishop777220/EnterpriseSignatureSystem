@@ -5,14 +5,12 @@
 package entitys;
 
 import com.tsystem.tplatform.entityes.TPItem;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 /**
  * Реестр докментов
@@ -52,6 +50,9 @@ public class Register extends TPItem {
     // @OneToMany(mappedBy = "register", cascade = CascadeType.ALL, orphanRemoval = true)
     @OneToMany(mappedBy = "register")
     public Set<DocumentType> documentTypeSet;
+    
+    @OneToMany(mappedBy = "register")
+    public Set<RegisterRole> registerRoleSet;
 
     public Register() {
         this.sourceSet = new HashSet<>();
