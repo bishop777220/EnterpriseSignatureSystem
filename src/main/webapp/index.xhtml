@@ -54,22 +54,22 @@
                             <p:linkButton icon="pi pi-home" />
                         </p:toolbarGroup>
                         <p:toolbarGroup rendered="#{registerViewMasterController.currentRregister.isDayTimeDocuments}">
-                           
-                                <p:datePicker value="#{registerViewMasterController.startDate}" showIcon="true" lang="ru" locale="ru" >
-                                    <p:ajax update="@form" process="@this"/>
-                                </p:datePicker>
-                                <p:outputLabel value="&nbsp;-&nbsp;" rendered="#{registerViewMasterController.dateInterval}" />
-                                <p:datePicker id="endDate" value="#{registerViewMasterController.endDate}" 
-                                              showIcon="true" lang="ru" locale="ru" 
-                                              mindate="#{registerViewMasterController.startDate}"
-                                              rendered="#{registerViewMasterController.dateInterval}" >
-                                    <p:ajax update="@form" process="@this"/>
-                                </p:datePicker>      
-                                <p:outputLabel value="&nbsp;" />
-                                <p:selectBooleanButton onLabel="За одну дату" offLabel="Интервал дат" value="#{registerViewMasterController.dateInterval}" >
-                                    <p:ajax update="@form" process="@this"/>
-                                </p:selectBooleanButton>
-                            
+
+                            <p:datePicker value="#{registerViewMasterController.startDate}" showIcon="true" lang="ru" locale="ru" >
+                                <p:ajax update="@form" process="@this"/>
+                            </p:datePicker>
+                            <p:outputLabel value="&nbsp;-&nbsp;" rendered="#{registerViewMasterController.dateInterval}" />
+                            <p:datePicker id="endDate" value="#{registerViewMasterController.endDate}" 
+                                          showIcon="true" lang="ru" locale="ru" 
+                                          mindate="#{registerViewMasterController.startDate}"
+                                          rendered="#{registerViewMasterController.dateInterval}" >
+                                <p:ajax update="@form" process="@this"/>
+                            </p:datePicker>      
+                            <p:outputLabel value="&nbsp;" />
+                            <p:selectBooleanButton onLabel="За одну дату" offLabel="Интервал дат" value="#{registerViewMasterController.dateInterval}" >
+                                <p:ajax update="@form" process="@this"/>
+                            </p:selectBooleanButton>
+
                         </p:toolbarGroup>
 
                         <p:toolbarGroup align="right">
@@ -89,40 +89,31 @@
 
 
                     <div>
-                        <ui:repeat value="#{registerViewMasterController.dateList}" var="date">
-                            <p:fieldset  legend="#{date}" toggleable="true">
-                                <ui:repeat value="#{registerViewMasterController.currentRregister.documentTypeSet}" var="documentType">
-
-                                    <p:panel header="#{documentType.title}">
-                                        <p:dataScroller value="#{documentType.fileTemplateList}" var="fileTemplate">
-
-                                            <p:dataTable value="#{fileTemplate.findFileByDate(date)}" var="file">
-
-                                                <p:column width="32">
-                                                    <i class="pi #{fileTemplate.required ? 'pi-check' : ''}"></i>
-                                                </p:column>
-
-                                                <p:column>
-                                                    <p:link value="#{file.getName()}" href="#{file.toURI()}" />
-                                                </p:column>
-
-                                                <p:column>
-
-                                                </p:column>
-
-                                                <p:column>
-
-                                                </p:column>
-                                            </p:dataTable>
+                        #{fileLoadrBeansAsync.setDateList(registerViewMasterController.dateList)}
+                        #{fileLoadrBeansAsync.setCurrentRregister(registerViewMasterController.currentRregister)}
+                        #{fileLoadrBeansAsync.createDayDocumentTypesSet()}
 
 
+                        <ui:repeat value="#{fileLoadrBeansAsync.dayDocumentTypesList}" var="dayDocumentTypes">
+                            #{dayDocumentTypes.date}
 
-                                        </p:dataScroller>
+
+                            <p:fieldset  legend="#{dayDocumentTypes.date}" toggleable="true">
+
+                                <ui:repeat value="#{dayDocumentTypes.fileTemplateList}" var="fileTemplateList">
+                                    <p:panel header="#{fileTemplateList.title}">
+                                        <p:dataTable value="#{fileTemplateList.fileToBeSignedSet}" var="fileToBeSignedSet" >
+                                            <p:column>
+                                                #{fileToBeSignedSet.fileName}
+                                            </p:column>
+                                        </p:dataTable>
                                     </p:panel>
-
+                                    
                                 </ui:repeat>
                             </p:fieldset>
+
                         </ui:repeat>
+
 
                     </div>
                 </h:form>

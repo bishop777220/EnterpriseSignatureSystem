@@ -32,7 +32,7 @@ public class FileToBeSigned extends TPItem{
     @JoinColumn(name = "fileTemplate", referencedColumnName = "id")
     private FileTemplate fileTemplate;
     
-    @OneToMany(mappedBy = "fileTemplate")
+    @OneToMany(mappedBy = "fileToBeSigned")
     public Set<Signature> signatureSet;
 
     public FileToBeSigned() {

@@ -48,7 +48,7 @@ public class DocumentType extends TPItem {
 
     // @OneToMany(mappedBy = "register", cascade = CascadeType.ALL, orphanRemoval = true)
     @OneToMany(mappedBy = "documentType")
-    public Set<FileTemplate> fileTemplateList;
+    public List<FileTemplate> fileTemplateList;
 
     public DocumentType() {
     }
@@ -93,13 +93,15 @@ public class DocumentType extends TPItem {
         this.register = register;
     }
 
-    public Set<FileTemplate> getFileTemplateList() {
+    public List<FileTemplate> getFileTemplateList() {
         return fileTemplateList;
     }
 
-    public void setFileTemplateList(Set<FileTemplate> fileTemplateList) {
+    public void setFileTemplateList(List<FileTemplate> fileTemplateList) {
         this.fileTemplateList = fileTemplateList;
     }
+
+    
 
     public Set<String> getFullSourcePath(LocalDate date) {
         String dayTimeDirectory = this.register.getDateFolderMask();

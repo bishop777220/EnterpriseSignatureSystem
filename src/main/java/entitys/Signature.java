@@ -4,7 +4,6 @@
  */
 package entitys;
 
-import entitys.FileToBeSigned;
 import com.tsystem.tplatform.entityes.TPItem;
 import com.tsystem.tplatform.security.TPUser;
 import jakarta.persistence.Column;

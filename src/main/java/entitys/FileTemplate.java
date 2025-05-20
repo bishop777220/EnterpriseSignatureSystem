@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -52,6 +53,7 @@ public class FileTemplate extends TPItem  {
     public Set<FileToBeSigned> fileToBeSignedSet;
     
     public FileTemplate() {
+        this.fileToBeSignedSet = new HashSet<>();
     }
 
     public String getDescription() {
@@ -94,31 +96,39 @@ public class FileTemplate extends TPItem  {
         this.notSignable = notSignable;
     }
     
-    public List<File> findFileByDate(LocalDate date) {
-        List<File> fileList = new ArrayList<>();
-        for (String dirPath : this.getDocumentType().getFullSourcePath(date)) {
-            File dir = new File(dirPath);
-            if (dir.canExecute() && dir.isDirectory()) {
-                List<File> dirFiles = getFileDirectory(dir, this.getDocumentType().getRecursive());
-                fileList.addAll(dirFiles);
-            }
-        }
-        return fileList;
-    }
+//    public List<File> findFileByDate(LocalDate date) {
+//        List<File> fileList = new ArrayList<>();
+//        for (String dirPath : this.getDocumentType().getFullSourcePath(date)) {
+//            File dir = new File(dirPath);
+//            if (dir.canExecute() && dir.isDirectory()) {
+//                List<File> dirFiles = getFileDirectory(dir, this.getDocumentType().getRecursive());
+//                fileList.addAll(dirFiles);
+//            }
+//        }
+//        return fileList;
+//    }
     
-    private List<File> getFileDirectory(File dir, Boolean recursive) {
-        List<File> fileList = new ArrayList<>();
-        File[] files = dir.listFiles();
-        for (File file : files) {
-            if (file.isFile()) {
-                fileList.add(file);
-            }
-            if(file.isDirectory() && recursive){
-                List<File> dirFiles = getFileDirectory(file, recursive);
-                fileList.addAll(dirFiles);
-            }
-        }
-        return fileList;
+//    private List<File> getFileDirectory(File dir, Boolean recursive) {
+//        List<File> fileList = new ArrayList<>();
+//        File[] files = dir.listFiles();
+//        for (File file : files) {
+//            if (file.isFile()) {
+//                fileList.add(file);
+//            }
+//            if(file.isDirectory() && recursive){
+//                List<File> dirFiles = getFileDirectory(file, recursive);
+//                fileList.addAll(dirFiles);
+//            }
+//        }
+//        return fileList;
+//    }
+
+    public Set<FileToBeSigned> getFileToBeSignedSet() {
+        return fileToBeSignedSet;
+    }
+
+    public void setFileToBeSignedSet(Set<FileToBeSigned> fileToBeSignedSet) {
+        this.fileToBeSignedSet = fileToBeSignedSet;
     }
     
 }
