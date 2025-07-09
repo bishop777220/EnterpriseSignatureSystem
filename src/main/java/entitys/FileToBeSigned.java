@@ -27,6 +27,9 @@ public class FileToBeSigned extends TPItem{
     
     @Column(name = "fileName", length = 50)
     private String fileName;
+
+    @Column(name = "folderPath", length = 250)
+    private String folderPath;
     
     @ManyToOne    
     @JoinColumn(name = "fileTemplate", referencedColumnName = "id")
@@ -52,6 +55,18 @@ public class FileToBeSigned extends TPItem{
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public String getFolderPath() {
+        return folderPath;
+    }
+
+    public void setFolderPath(String folderPath) {
+        this.folderPath = folderPath;
+    }
+    
+    public String getFullFilePath() {
+        return this.folderPath + "\\" + this.fileName;
     }
 
     public FileTemplate getFileTemplate() {

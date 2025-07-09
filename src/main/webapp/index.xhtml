@@ -104,7 +104,9 @@
                                     <p:panel header="#{fileTemplateList.title}">
                                         <p:dataTable value="#{fileTemplateList.fileToBeSignedSet}" var="fileToBeSignedSet" >
                                             <p:column>
-                                                #{fileToBeSignedSet.fileName}
+                                                <a href="/EnterpriseSignatureSystem/files/#{fileToBeSignedSet.id}" >#{fileToBeSignedSet.fileName}</a>
+                                                
+                                                (#{fileToBeSignedSet.fullFilePath})
                                             </p:column>
                                         </p:dataTable>
                                     </p:panel>
@@ -115,7 +117,7 @@
                         </ui:repeat>
 
 
-                    </div>
+                    </div>/files/*
                 </h:form>
             </ui:define>
 

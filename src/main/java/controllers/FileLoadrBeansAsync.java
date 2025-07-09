@@ -99,6 +99,7 @@ public class FileLoadrBeansAsync implements Serializable {
                                 
                                 fileToBeSigned.setDayTimeDirectory(dayDirectoty);
                                 fileToBeSigned.setFileName(file.getName());
+                                fileToBeSigned.setFolderPath(file.getParent());
                                 fileToBeSignedFacade.create(fileToBeSigned);
                                 fileTemplate.getFileToBeSignedSet().add(fileToBeSigned);
                             }

@@ -78,7 +78,11 @@ public class DocumentType extends TPItem {
     }
 
     public Boolean getRecursive() {
-        return recursive;
+        if(recursive && !beforeTheDate){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void setRecursive(Boolean recursive) {
